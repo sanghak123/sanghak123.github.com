@@ -1,6 +1,0 @@
----
-layout: post
-title: "2018-07-27-First Post.md"
-date: "2018-07-27 15:40:50 +0900"
----
-![My helpful screenshot]({{ "http://trsketch.dothome.co.kr/_contents/2009curi/images/img920014.png" | absolute_url }})

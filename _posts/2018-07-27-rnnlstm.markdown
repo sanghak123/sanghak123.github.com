@@ -26,3 +26,21 @@ RNN에서 문제점은 gradient descent algorithm을 사용해서 시간이 처�
 ($$t$$가 0에 가까워질수록) gradient(미분값)이 크게 줄기 때문에 weight의 업데이트가
 매우 조금밖에 되지 않는다는 단점이 있다. 이것을 __vanishing gradient problem__ 이라고
 부른다. 이것을 해결하기 위해서 고안된 것이 바로 __LSTM__ 이다.
+
+RNN에서는 hidden state가
+
+$$h_t=tanh(W_{hh}h_{t-1}+W_{xh}x_t+b_h)$$
+
+의 형태로 표현된 것에 비해, LSTM에서는
+
+$$% <![CDATA[
+\begin{align*}
+{ f }_{ t }&=\sigma ({ W }_{ xh\_ f }{ x }_{ t }+{ W }_{ hh\_ f }{ h }_{ t-1 }+{ b }_{ h\_ f })\\ { i }_{ t }&=\sigma ({ W }_{ xh\_ i }{ x }_{ t }+{ W }_{ hh\_ i }{ h }_{ t-1 }+{ b }_{ h\_ i })\\ { o }_{ t }&=\sigma ({ W }_{ xh\_ o }{ x }_{ t }+{ W }_{ hh\_ o }{ h }_{ t-1 }+{ b }_{ h\_ o })\\ { g }_{ t }&=\tanh { ({ W }_{ xh\_ g }{ x }_{ t }+{ W }_{ hh\_ g }{ h }_{ t-1 }+{ b }_{ h\_ g }) } \\ { c }_{ t }&={ f }_{ t }\odot { c }_{ t-1 }+{ i }_{ t }\odot { g }_{ t }\\ { h }_{ t }&={ o }_{ t }\odot \tanh { ({ c }_{ t }) }
+\end{align*} %]]>$$
+
+형태로 표현되었다.
+
+RNN의 $$h_t$$과 비슷한 형태로 $$f_t$$, $$i_t$$, $$o_t$$, $$g_t$$를 계산하고, 그 값들을 활용해서
+$$c_i$$, $$h_i$$를 계산한다는 것을 볼 수 있다.
+
+$$f_t$$는 __forget gate__ 로서, 값이 1에 가까울수록 이전 상태의 정보를 더 많이 기억하기 위해 사용된다.

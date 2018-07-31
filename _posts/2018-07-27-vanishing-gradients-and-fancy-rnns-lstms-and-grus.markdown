@@ -38,6 +38,18 @@ $$\sigma$$는 sigmoid 함수로서, 아래에서 올라오는 값을 0과 1 사�
 
 ### Step-by-Step LSTM Walk Through
 #### Forget Gate  
-![Forget gate]({{ "http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-focus-f.png" | absolute_url }})
-$$f_t=\sigma(W_f\cdot[h_{t-1},x_t]+b_f)$$    
-첫번째 게이트는 forget gate인데, 어떤 정보를 버릴지 정하는 게이트라고 생각하면 된다. 이전 loop iteration의 결과값인 $$h_{t-1}$$와 새로운 인풋인 $$x_t$를 받아서 forget gate에 해당하는 weight $$W_f$$ 를 곱해주고 이것을 sigmoid 처리함으로써 0과 1 사이의 값을 갖게 한 다음
+![Forget gate]({{ "http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-focus-f.png" | absolute_url }})     
+첫번째 게이트는 forget gate인데, 어떤 정보를 버릴지 정하는 게이트이다. 이전 loop iteration의 결과값인 $$h_{t-1}$$와 새로운 인풋인 $$x_t$$를 받아서 forget gate에 해당하는 weight $$W_f$$ 를 곱해주고 이것을 sigmoid 처리함으로써 0과 1 사이의 값을 갖게 한 다음 cell state에 pointwise multiplication 해준다. 여기에서 sigmoid의 결과값이 0에 가까울수록 더 많이 잊는다.
+
+뒤에 올 단어를 찾는 모델을 구성할 때, 주어의 성별이 중요한 경우 이 성별을 계속 기억을 해두었다가, 나중에 주어가 바뀐 경우 이전의 성별을 잊기 위해서 어떤 operation을 진행해야하는데 forget gate가 이것을 해주게 된다.
+### Input Gate and $$tanh$$  
+![Input gate]({{ "http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-focus-i.png" | absolute_url }})  
+sigmoid layer는 input gate라고 하고, 어떤 값을 업데이트 할지 고르고, $$tanh$$는 새로운 후보 값인 $$\tilde{C}_t$$를 만든다. 그리고 두 값을 결합하고, 이것을 가지고 cell state를 업데이트 해준다.
+
+앞의 예에서 새 주어의 성별 정보를 얻어야 할 때 이 게이트를 사용한다.
+### New Cell State  
+![Input gate]({{ "http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-focus-i.png" | absolute_url }})  
+$$f_t$$, $$i_t$$를 사용하여 cell state를 업데이트 해준다. 이전 state를 얼마나 기억할지를 $$f_t$$를 통해서 결정하고, 새로운 후보 state $$\tilde{C}_t$$와 이것을 얼마나 적용할 지를 $$i_t$$를 곱한 후 두 값을 합한다.
+### New Output  
+![Output]({{ "http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-focus-o.png" | absolute_url }})  
+새로 계산된 cell state에서 어떤 값을 쓸지를 결정하는 sigmoid layer, cell state에 $$tanh$$를 처리한 layer. 그 두 레이어의 값을 곱해서 그것을 새로운 output인 $$h_t$$로 쓴다.

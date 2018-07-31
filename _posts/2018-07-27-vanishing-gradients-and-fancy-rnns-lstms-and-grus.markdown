@@ -40,4 +40,4 @@ $$\sigma$$는 sigmoid 함수로서, 아래에서 올라오는 값을 0과 1 사�
 #### Forget Gate  
 ![Forget gate]({{ "http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-focus-f.png" | absolute_url }})
 $$f_t=\sigma(W_f\cdot[h_{t-1},x_t]+b_f)$$    
-첫번째 게이트는 forget gate인데, 어떤 정보를 버릴지 정하는 게이트라고 생각하면 된다. 이전 loop iteration의 결과값인 $$h_{t-1}$$와 새로운 인풋인 $$x_t$를 받아서 forget gate에 해당하는 weight $$W_f$$ 를 곱해주고 이것을 sigmoid 처리함으로써 0과 1 사이의 값을 갖게 한 다음 
+첫번째 게이트는 forget gate인데, 어떤 정보를 버릴지 정하는 게이트라고 생각하면 된다. 이전 loop iteration의 결과값인 $$h_{t-1}$$와 새로운 인풋인 $$x_t$를 받아서 forget gate에 해당하는 weight $$W_f$$ 를 곱해주고 이것을 sigmoid 처리함으로써 0과 1 사이의 값을 갖게 한 다음

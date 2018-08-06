@@ -44,7 +44,7 @@ sigmoid layer는 input gate라고 하고, 어떤 값을 업데이트 할지 고�
 
 앞의 예에서 새 주어의 성별 정보를 얻어야 할 때 이 게이트를 사용한다.
 ## New Cell State  
-![Input gate]({{ "http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-focus-i.png" | absolute_url }})  
+![Input gate]({{ "http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-focus-C.png" | absolute_url }})  
 $$f_t$$, $$i_t$$를 사용하여 cell state를 업데이트 해준다. 이전 state를 얼마나 기억할지를 $$f_t$$를 통해서 결정하고, 새로운 후보 state $$\tilde{C}_t$$와 이것을 얼마나 적용할 지를 $$i_t$$를 곱한 후 두 값을 합한다.
 ## New Output  
 ![Output]({{ "http://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-focus-o.png" | absolute_url }})  
